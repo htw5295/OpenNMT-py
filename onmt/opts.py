@@ -424,11 +424,11 @@ def train_opts(parser):
     group.add('--valid_batch_size', '-valid_batch_size', type=int, default=32,
               help='Maximum batch size for validation')
     group.add('--max_generator_batches', '-max_generator_batches',
-              type=int, default=32,
+              type=int, default=1024,
               help="Maximum batches of words in a sequence to run "
                    "the generator on in parallel. Higher is faster, but "
                    "uses more memory. Set to 0 to disable.")
-    group.add('--train_steps', '-train_steps', type=int, default=100000,
+    group.add('--train_steps', '-train_steps', type=int, default=10000,
               help='Number of training steps')
     group.add('--single_pass', '-single_pass', action='store_true',
               help="Make a single pass over the training dataset.")
@@ -498,7 +498,7 @@ def train_opts(parser):
 
     # learning rate
     group = parser.add_argument_group('Optimization- Rate')
-    group.add('--learning_rate', '-learning_rate', type=float, default=1.0,
+    group.add('--learning_rate', '-learning_rate', type=float, default=1,
               help="Starting learning rate. "
                    "Recommended settings: sgd = 1, adagrad = 0.1, "
                    "adadelta = 1, adam = 0.001")
@@ -521,7 +521,7 @@ def train_opts(parser):
               help="Number of warmup steps for custom decay.")
 
     group = parser.add_argument_group('Logging')
-    group.add('--report_every', '-report_every', type=int, default=50,
+    group.add('--report_every', '-report_every', type=int, default=500,
               help="Print stats at this interval.")
     group.add('--log_file', '-log_file', type=str, default="",
               help="Output logs to a file under this path.")

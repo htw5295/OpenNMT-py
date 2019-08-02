@@ -44,7 +44,7 @@ def text_sort_key(ex):
 
 # mix this with partial
 def _feature_tokenize(
-        string, layer=0, tok_delim=None, feat_delim=None, truncate=None):
+        string, layer=0, tok_delim='\t', feat_delim=None, truncate=None):
     """Split apart word features (like POS/NER tags) from the tokens.
 
     Args:
@@ -60,7 +60,7 @@ def _feature_tokenize(
     Returns:
         List[str] of tokens.
     """
-
+    string = string.strip()
     tokens = string.split(tok_delim)
     if truncate is not None:
         tokens = tokens[:truncate]

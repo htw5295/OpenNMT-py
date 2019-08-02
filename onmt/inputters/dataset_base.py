@@ -129,6 +129,18 @@ class Dataset(TorchtextDataset):
             ex_fields = {k: [(k, v)] for k, v in fields.items() if
                          k in ex_dict}
             ex = Example.fromdict(ex_dict, ex_fields)
+            if 'tgt' in ex_dict.keys():
+                ex_tgt = []
+                for word in getattr(ex, 'tgt')[0]:
+                    if word not in getattr(ex, 'src')[0]:
+                        ex_tgt += word.split(' ')
+                    else:
+                        ex_tgt.append(word)
+                for i, word in enumerate(ex_tgt):
+                    if word == '':
+                        del ex_tgt[i]
+                ex_tgt = [ex_tgt]
+                setattr(ex, 'tgt', ex_tgt)
             examples.append(ex)
 
         # fields needs to have only keys that examples have as attrs

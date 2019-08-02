@@ -17,6 +17,10 @@ from onmt.inputters.inputter import build_dataset_iter, \
 from itertools import cycle
 
 
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
+
+
 def main(opt):
     ArgumentParser.validate_train_opts(opt)
     ArgumentParser.update_model_opts(opt)
